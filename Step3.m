@@ -324,3 +324,7 @@ for source_idx = 1:n_latents
     H(:, source_idx) = H_source(:, min_lambda_idx);
 
 end
+
+%% Compute source signals z(k)
+
+z_k = H * xek;

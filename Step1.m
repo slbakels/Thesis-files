@@ -1,5 +1,5 @@
 % Thesis Sanna Bakels, 4480279
-% Step 1: Filtering the raw EEG data and creating ERPs
+% Step 1: Filtering the raw EEG data and creating SSR
 
 clear; close all; clc;
 
@@ -53,7 +53,7 @@ EEG = eeg_checkset( EEG );
 EEG = pop_reref( EEG, []);
 eeglab redraw;
 
-%% Compute the ERP for one subject, each trial, such that you have 160 periods in total
+%% Compute the SSR for one subject, each trial, such that you have 160 periods in total
 % Based on equation 1. from Vlaar et al. (2017) - Quantification of
 % task-dependent cortical activation evoked by robotic continous wrist
 % joint manipulation in chronic hemiparetic stroke. 
@@ -81,7 +81,7 @@ for i = 1:numTrials
     end
 end
 
-% Calculate the mean ERP for all channels and time points
+% Calculate the mean SSR for all channels and time points
 averageData = mean(allData, 3); % Compute the average along the third dimension (epochs)
 reshapedData = reshape(allData(1, :, :), [numTimePoints, numPeriods]);
 
@@ -89,7 +89,7 @@ subplot(1, 2, 1);
 plot(time, reshapedData(:,1), 'LineWidth', 0.005, 'DisplayName', 'Electrical activity for one epoch');
 hold on
 plot(time, reshapedData(:,2:end), 'LineWidth', 0.005, 'HandleVisibility', 'off');
-plot(time, averageData(1, :), 'k', 'LineWidth', 3, 'DisplayName', 'ERP')
+plot(time, averageData(1, :), 'k', 'LineWidth', 3, 'DisplayName', 'SSR')
 
 subplot(1, 2, 2);
 plot(time, averageData(1, :), 'k', 'LineWidth', 2);
